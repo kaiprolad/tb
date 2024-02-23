@@ -1,0 +1,242 @@
+ upstream miaosuhk {
+    	hash $remote_addr consistent;
+    	server 172.104.95.64:10091 max_fails=3 fail_timeout=30s;
+    }
+    upstream miaosusg {
+        hash $remote_addr consistent;
+        server 139.162.56.91:10091 max_fails=3 fail_timeout=30s;
+    }
+    upstream miaosujp {
+        hash $remote_addr consistent;
+    	server 172.104.95.64:10091 max_fails=3 fail_timeout=30s;
+    	server 139.162.109.153:10091 max_fails=3 fail_timeout=30s;
+    }
+    upstream miaosuuk {
+        hash $remote_addr consistent;
+        server 143.47.249.213:10091 max_fails=3 fail_timeout=30s;
+    }
+     upstream miaosuus {
+        hash $remote_addr consistent;
+        server 18.218.254.204:10091 max_fails=3 fail_timeout=30s;
+    }
+     upstream miaosude {
+        hash $remote_addr consistent;
+        server 138.2.133.156:10091 max_fails=3 fail_timeout=30s;
+    }
+     upstream miaosutw {
+        hash $remote_addr consistent;
+        server 129.148.27.124:10091 max_fails=3 fail_timeout=30s;
+    }
+     upstream miaosuin {
+        hash $remote_addr consistent;
+        server 45.79.117.46:10091 max_fails=3 fail_timeout=30s;
+    }
+     upstream miaosukr {
+        hash $remote_addr consistent;
+        server 13.124.84.125:10091 max_fails=3 fail_timeout=30s;
+    }
+     upstream miaosuca {
+        hash $remote_addr consistent;
+        server 132.145.109.63:10091 max_fails=3 fail_timeout=30s;
+    }
+    server {
+        listen              443 ssl;                   
+        server_name sphk.1234567890spcloud.com;
+        ssl_protocols       TLSv1.2 TLSv1.3;      
+        
+        ssl_certificate /usr/local/soga/spcloud.crt; 
+        ssl_certificate_key /usr/local/soga/privatesp.key; 
+        ssl_session_cache   shared:SSL:10m;                                                          
+        ssl_session_timeout 10m;
+        proxy_connect_timeout 5s;  # 与被代理服务器建立连接的超时时间为5s
+    	proxy_timeout 20s;   # 获取被代理服务器的响应最大超时时间为20s
+        proxy_next_upstream on;  # 当被代理的服务器返回错误或超时时，将未返回响应的客户端连接请求传递给upstream中的下一个服务器
+        proxy_next_upstream_tries 3;   # 转发尝试请求最多3次
+        proxy_next_upstream_timeout 10s;    # 总尝试超时时间为10s
+        proxy_socket_keepalive on;  # 开启SO_KEEPALIVE选项进行心跳检测
+        proxy_protocol    on;
+        proxy_pass        miaosuhk;
+    }
+    server {
+        listen              443 ssl;                   
+        server_name spsg.1234567890spcloud.com;
+        ssl_protocols       TLSv1.2 TLSv1.3;      
+
+        ssl_certificate /usr/local/soga/spcloud.crt; 
+        ssl_certificate_key /usr/local/soga/privatesp.key; 
+        ssl_session_cache   shared:SSL:10m;            
+                                               
+        ssl_session_timeout 10m;
+        proxy_connect_timeout 5s;  # 与被代理服务器建立连接的超时时间为5s
+    	proxy_timeout 20s;   # 获取被代理服务器的响应最大超时时间为20s
+        proxy_next_upstream on;  # 当被代理的服务器返回错误或超时时，将未返回响应的客户端连接请求传递给upstream中的下一个服务器
+        proxy_next_upstream_tries 3;   # 转发尝试请求最多3次
+        proxy_next_upstream_timeout 10s;    # 总尝试超时时间为10s
+        proxy_socket_keepalive on;  # 开启SO_KEEPALIVE选项进行心跳检测
+        proxy_protocol    on;
+        
+        proxy_pass        miaosusg;
+
+    }
+    server {
+        listen              443 ssl;                   
+        server_name spjp1.1234567890spcloud.com;
+        ssl_protocols       TLSv1.2 TLSv1.3;      
+
+        ssl_certificate /usr/local/soga/spcloud.crt; 
+        ssl_certificate_key /usr/local/soga/privatesp.key; 
+        ssl_session_cache   shared:SSL:10m;            
+                                                     
+        ssl_session_timeout 10m;
+        proxy_connect_timeout 5s;  # 与被代理服务器建立连接的超时时间为5s
+        proxy_timeout 20s;   # 获取被代理服务器的响应最大超时时间为20s
+        proxy_next_upstream on;  # 当被代理的服务器返回错误或超时时，将未返回响应的客户端连接请求传递给upstream中的下一个服务器
+        proxy_next_upstream_tries 3;   # 转发尝试请求最多3次
+        proxy_next_upstream_timeout 10s;    # 总尝试超时时间为10s
+        proxy_socket_keepalive on;  # 开启SO_KEEPALIVE选项进行心跳检测
+        proxy_protocol    on;
+        proxy_pass        miaosujp;
+
+    }
+    server {
+        listen              443 ssl;                   
+        server_name spuk.1234567890spcloud.com;
+        ssl_protocols       TLSv1.2 TLSv1.3;      
+
+        ssl_certificate /usr/local/soga/spcloud.crt; 
+        ssl_certificate_key /usr/local/soga/privatesp.key; 
+        ssl_session_cache   shared:SSL:10m;            
+                                               
+        ssl_session_timeout 10m;
+        proxy_connect_timeout 5s;  # 与被代理服务器建立连接的超时时间为5s
+        proxy_timeout 20s;   # 获取被代理服务器的响应最大超时时间为20s
+        proxy_next_upstream on;  # 当被代理的服务器返回错误或超时时，将未返回响应的客户端连接请求传递给upstream中的下一个服务器
+        proxy_next_upstream_tries 3;   # 转发尝试请求最多3次
+        proxy_next_upstream_timeout 10s;    # 总尝试超时时间为10s
+        proxy_socket_keepalive on;  # 开启SO_KEEPALIVE选项进行心跳检测
+        proxy_protocol    on;
+        proxy_pass        miaosuuk;
+    }
+    server {
+        listen              443 ssl;                   
+        server_name spus.1234567890spcloud.com;
+        ssl_protocols       TLSv1.2 TLSv1.3;      
+        
+        ssl_certificate /usr/local/soga/spcloud.crt; 
+        ssl_certificate_key /usr/local/soga/privatesp.key; 
+        ssl_session_cache   shared:SSL:10m;            
+                                           
+        ssl_session_timeout 10m;
+        proxy_connect_timeout 5s;  # 与被代理服务器建立连接的超时时间为5s
+        proxy_timeout 20s;   # 获取被代理服务器的响应最大超时时间为20s
+        proxy_next_upstream on;  # 当被代理的服务器返回错误或超时时，将未返回响应的客户端连接请求传递给upstream中的下一个服务器
+        proxy_next_upstream_tries 3;   # 转发尝试请求最多3次
+        proxy_next_upstream_timeout 10s;    # 总尝试超时时间为10s
+        proxy_socket_keepalive on;  # 开启SO_KEEPALIVE选项进行心跳检测
+        proxy_protocol    on;
+        proxy_pass        miaosuus;
+
+    }
+    server {
+        listen              443 ssl;                   
+        server_name spde.1234567890spcloud.com;
+        ssl_protocols       TLSv1.2 TLSv1.3;      
+        
+        ssl_certificate /usr/local/soga/spcloud.crt; 
+        ssl_certificate_key /usr/local/soga/privatesp.key; 
+        ssl_session_cache   shared:SSL:10m;            
+                                          
+        ssl_session_timeout 10m;
+        proxy_connect_timeout 5s;  # 与被代理服务器建立连接的超时时间为5s
+        proxy_timeout 20s;   # 获取被代理服务器的响应最大超时时间为20s
+
+        proxy_next_upstream on;  # 当被代理的服务器返回错误或超时时，将未返回响应的客户端连接请求传递给upstream中的下一个服务器
+        proxy_next_upstream_tries 3;   # 转发尝试请求最多3次
+        proxy_next_upstream_timeout 10s;    # 总尝试超时时间为10s
+        proxy_socket_keepalive on;  # 开启SO_KEEPALIVE选项进行心跳检测
+        proxy_protocol    on;
+        proxy_pass        miaosude;
+
+    }
+    server {
+        listen              443 ssl;                   
+        server_name spca.1234567890spcloud.com;
+        ssl_protocols       TLSv1.2 TLSv1.3;      
+        
+        ssl_certificate /usr/local/soga/spcloud.crt; 
+        ssl_certificate_key /usr/local/soga/privatesp.key; 
+        ssl_session_cache   shared:SSL:10m;            
+                                              
+        ssl_session_timeout 10m;
+        proxy_connect_timeout 5s;  # 与被代理服务器建立连接的超时时间为5s
+        proxy_timeout 20s;   # 获取被代理服务器的响应最大超时时间为20s
+
+        proxy_next_upstream on;  # 当被代理的服务器返回错误或超时时，将未返回响应的客户端连接请求传递给upstream中的下一个服务器
+        proxy_next_upstream_tries 3;   # 转发尝试请求最多3次
+        proxy_next_upstream_timeout 10s;    # 总尝试超时时间为10s
+        proxy_socket_keepalive on;  # 开启SO_KEEPALIVE选项进行心跳检测
+        proxy_protocol    on;
+        proxy_pass        miaosuca;
+
+    }
+    server {
+        listen              443 ssl;                   
+        server_name spin.1234567890spcloud.com;
+        ssl_protocols       TLSv1.2 TLSv1.3;      
+        
+        ssl_certificate /usr/local/soga/spcloud.crt; 
+        ssl_certificate_key /usr/local/soga/privatesp.key; 
+        ssl_session_cache   shared:SSL:10m;            
+                                              
+        ssl_session_timeout 10m;
+        proxy_connect_timeout 5s;  # 与被代理服务器建立连接的超时时间为5s
+        proxy_timeout 20s;   # 获取被代理服务器的响应最大超时时间为20s
+
+        proxy_next_upstream on;  # 当被代理的服务器返回错误或超时时，将未返回响应的客户端连接请求传递给upstream中的下一个服务器
+        proxy_next_upstream_tries 3;   # 转发尝试请求最多3次
+        proxy_next_upstream_timeout 10s;    # 总尝试超时时间为10s
+        proxy_socket_keepalive on;  # 开启SO_KEEPALIVE选项进行心跳检测
+        proxy_protocol    on;
+        proxy_pass        miaosuin;
+
+    }
+    server {
+        listen              443 ssl;                   
+        server_name sptw.1234567890spcloud.com;
+        ssl_protocols       TLSv1.2 TLSv1.3;      
+        
+        ssl_certificate /usr/local/soga/spcloud.crt; 
+        ssl_certificate_key /usr/local/soga/privatesp.key; 
+        ssl_session_cache   shared:SSL:10m;            
+                                           
+        ssl_session_timeout 10m;
+        proxy_connect_timeout 5s;  # 与被代理服务器建立连接的超时时间为5s
+        proxy_timeout 20s;   # 获取被代理服务器的响应最大超时时间为20s
+
+        proxy_next_upstream on;  # 当被代理的服务器返回错误或超时时，将未返回响应的客户端连接请求传递给upstream中的下一个服务器
+        proxy_next_upstream_tries 3;   # 转发尝试请求最多3次
+        proxy_next_upstream_timeout 10s;    # 总尝试超时时间为10s
+        proxy_socket_keepalive on;  # 开启SO_KEEPALIVE选项进行心跳检测
+        proxy_protocol    on;
+        proxy_pass        miaosutw;
+    }
+    server {
+        listen              443 ssl;                   
+        server_name spkr.1234567890spcloud.com;
+        ssl_protocols       TLSv1.2 TLSv1.3;      
+        
+        ssl_certificate /usr/local/soga/spcloud.crt; 
+        ssl_certificate_key /usr/local/soga/privatesp.key; 
+        ssl_session_cache   shared:SSL:10m;                                                 
+        ssl_session_timeout 10m;
+        proxy_connect_timeout 5s;  # 与被代理服务器建立连接的超时时间为5s
+        proxy_timeout 20s;   # 获取被代理服务器的响应最大超时时间为20s
+
+        proxy_next_upstream on;  # 当被代理的服务器返回错误或超时时，将未返回响应的客户端连接请求传递给upstream中的下一个服务器
+        proxy_next_upstream_tries 3;   # 转发尝试请求最多3次
+        proxy_next_upstream_timeout 10s;    # 总尝试超时时间为10s
+        proxy_socket_keepalive on;  # 开启SO_KEEPALIVE选项进行心跳检测
+        proxy_protocol    on;
+        proxy_pass        miaosukr;
+
+    }
